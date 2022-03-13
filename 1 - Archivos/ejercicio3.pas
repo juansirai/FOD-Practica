@@ -11,15 +11,15 @@ ii. Listar en pantalla los empleados de a uno por línea.
 iii. Listar en pantalla empleados mayores de 70 años, próximos a jubilarse.
 NOTA: El nombre del archivo a crear o utilizar debe ser proporcionado por el usuario una
 única vez.
-   
-   
+
+
 }
 
 
 program ejercicio3;
 const
 	CORTE = 'FIN';
-type 
+type
 	str30 = string[30];
 	empleado = record
 		num:integer;
@@ -32,11 +32,10 @@ type
 
 procedure leerEmpleado(var E:empleado);
 begin
-	write('Ingrese Apellido: ');
-	readln(E.apellido);
-	if(E.apellido <> CORTE) then begin
+	write('Ingrese DNI: ');readln(E.dni);
+	write('Ingrese Apellido: ');readln(E.apellido);
+	if (E.apellido <> CORTE) then begin
 		write('Ingrese Nombre: ');readln(E.nombre);
-		write('Ingrese DNI: ');readln(E.dni);
 		write('Ingrese numero: ');readln(E.num);
 		write('Ingrese edad: ');readln(E.edad);
 	end;
@@ -62,7 +61,7 @@ begin
 	writeln('a: Crear nuevo archivo');
 	writeln('b: Utilizar archivo existente');
 	writeln('c: Salir');
-	read(selection);
+	readln(selection);
 end;
 
 
@@ -103,8 +102,8 @@ var
 	E:empleado;
 	buscar:string;
 	criterio:char;
-	encontre:boolean;
 	pos:integer;
+	encontre:boolean;
 begin
 	encontre:=False;
 	reset(archLogico);
@@ -112,29 +111,25 @@ begin
 	readln(criterio);
 	write('Ingrese empleado a buscar: ');readln(buscar);
 	if(criterio = 'a') then begin
-		while not EOF(archLogico) and not encontre do begin
+		while not EOF(archLogico)  do begin
 			read(archLogico, E);
 			if(E.nombre = buscar) then begin
+				imprimirEmpleado(E);
 				encontre:=True;
-				pos:= filePos(archLogico);
 			end;
 		end;
 	end
 	else begin
-		while not EOF(archLogico) and not encontre do begin
+		while not EOF(archLogico) do begin
 			read(archLogico, E);
 			if(E.apellido = buscar) then begin
+				imprimirEmpleado(E);
 				encontre:=True;
-				pos:= filePos(archLogico);
 			end;
-		end;	
+		end;
 	end;
-	if encontre then begin
-		seek(archLogico, pos);
-		read(archLogico, E);
-		imprimirEmpleado(E);
-	end
-	else writeln('No se encontro el empleado');
+
+	if not encontre then writeln('No se encontro el empleado');
 end;
 
 
@@ -173,4 +168,3 @@ BEGIN
 		menu1(selection);
 	end;
 END.
-
