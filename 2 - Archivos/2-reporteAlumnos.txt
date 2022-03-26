@@ -1,0 +1,12 @@
+124 10  sirai
+5  juan
+135 6  cutrona
+5  pilar
+177 10  ron
+5  juan
+180 8  carugno
+4  franco
+190 40  recalt
+40  fermin
+200 30  odetti
+29  alessandro

@@ -1,0 +1,13 @@
+1234 7456 Juan
+1345 3256 Pedro
+1345 3531 Pedro
+1345 2421 Pedro
+1500 353 Pilar
+1500 326 Pilar
+1700 356 Roberto
+1700 4244 Roberto
+1800 657 Patricio
+1800 342 Patricio
+1900 224 Mirta
+1900 223 Mirta
+2000 235 Jose
