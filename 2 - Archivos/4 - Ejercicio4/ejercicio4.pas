@@ -63,19 +63,21 @@ var
 	i:integer;
 	posMin:integer;
 begin
-	posMin:=-1;
-	min.cod_usuario:=CORTE;
-	min.fecha:='99/99/99';
-	for i:=1 to DIMF do begin
-		if(vector_reg[i].cod_usuario < min.cod_usuario) and (vector_reg[i].fecha<=min.fecha)  then begin
-			posMin:=i;
-			min:=vector_reg[i];
-		end;
-	end;
-	if(posMin <> -1) then begin
-		leer(vector_detalle[posMin], vector_reg[posMin]);
-	end;
-end;
+  min.cod_usuario:= CORTE; posMin:= -1;
+  min.fecha := '99/99/99';
+  for i:= 1 to DIMF do
+     if (vector_reg[i].cod_usuario <> CORTE) then 
+       if (vector_reg[i].cod_usuario <= min.cod_usuario) and (vector_reg[i].fecha <= min.fecha)  then begin
+		 posMin:= i;
+         min.cod_usuario:= vector_reg[i].cod_usuario;  
+         min.fecha:= vector_reg[i].fecha; 
+       end; 
+  if (posMin <> -1) then 
+    begin
+	  min:= vector_reg[posMin];
+      leer(vector_detalle[posMin], vector_reg[posMin]);
+    end;
+End;
  
 
 procedure merge(var v_detalles:vector_arch_detalle; var maestro:arch_maestro);
