@@ -170,6 +170,7 @@ BEGIN
 	//hago las asignaciones a mis archivos
 	for i:=1 to DIMF do begin
 		Assign(vector_det[i], 'detalle_'+i.ToString()+'.txt'); 
+		writeln(i.ToString());
 	end;
 	Assign(maestro,'maestro.dat');
 	writeln('Maestro antes de actualizar: ');
