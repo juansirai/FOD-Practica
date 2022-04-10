@@ -1,0 +1,9 @@
+Listado de productos para reponer stock
+Stock actual         Nombre
+38  Escobas
+56  Chupetines
+-41  Batatas
+428  Calzones
+152  Anteojos
+88  Poett
+-524  Lavandina

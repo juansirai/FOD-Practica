@@ -1,0 +1,16 @@
+2 124 600 200 Escobas
+5 147 800 400 Caramelos
+7 124 800 600 Chupetines
+8 14 100 30 Chasquibum
+9 124 1400 700 Papas
+10 147 400 400 Batatas
+12 124 800 500 Berenjenas
+16 14 100 30 Mandioca
+20 124 600 200 REmeras
+22 147 800 400 Pantalones
+25 124 800 600 Calzones
+30 14 100 30 Camisas
+32 112 600 200 Anteojos
+35 143 800 400 Gorros
+37 14 200 100 Poett
+38 156 100 30 Lavandina
