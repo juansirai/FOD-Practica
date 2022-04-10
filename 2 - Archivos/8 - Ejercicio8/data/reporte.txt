@@ -1,0 +1,123 @@
+Reporte de ventas clientes
+===========================
+===========================
+Datos del cliente
+Nombre:  Juan Apellido: Sirai
+Detalle de ventas: 
+Anio 1992
+Mes: 1 Total: 124.00
+Mes: 2 Total: 200.00
+Mes: 3 Total: 324.00
+Mes: 5 Total: 424.00
+Mes: 6 Total: 124.00
+Total anual: 1196.00
+ 
+Anio 1995
+Mes: 1 Total: 124.00
+Mes: 2 Total: 200.00
+Mes: 3 Total: 324.00
+Mes: 5 Total: 424.00
+Mes: 6 Total: 124.00
+Total anual: 1196.00
+ 
+Anio 1997
+Mes: 1 Total: 124.00
+Mes: 2 Total: 200.00
+Mes: 3 Total: 624.00
+Mes: 5 Total: 624.00
+Mes: 6 Total: 524.00
+Total anual: 2096.00
+ 
+Total Cliente: 4488.00
+---------------
+Datos del cliente
+Nombre:  Pilar Apellido: Cutrona
+Detalle de ventas: 
+Anio 1992
+Mes: 1 Total: 124.00
+Mes: 2 Total: 200.00
+Mes: 3 Total: 124.00
+Mes: 4 Total: 124.00
+Mes: 6 Total: 124.00
+Total anual: 696.00
+ 
+Anio 1996
+Mes: 1 Total: 124.00
+Mes: 2 Total: 200.00
+Mes: 3 Total: 124.00
+Mes: 4 Total: 124.00
+Mes: 6 Total: 124.00
+Total anual: 696.00
+ 
+Total Cliente: 1392.00
+---------------
+Datos del cliente
+Nombre:  Paco Apellido: Amoroso
+Detalle de ventas: 
+Anio 1992
+Mes: 1 Total: 648.00
+Mes: 4 Total: 548.00
+Mes: 5 Total: 124.00
+Mes: 6 Total: 200.00
+Mes: 9 Total: 748.00
+Mes: 10 Total: 124.00
+Total anual: 2392.00
+ 
+Anio 1999
+Mes: 1 Total: 648.00
+Mes: 4 Total: 548.00
+Mes: 5 Total: 124.00
+Mes: 6 Total: 200.00
+Mes: 9 Total: 748.00
+Mes: 10 Total: 124.00
+Total anual: 2392.00
+ 
+Total Cliente: 4784.00
+---------------
+Datos del cliente
+Nombre:  Roberto Apellido: Gomez
+Detalle de ventas: 
+Anio 1992
+Mes: 1 Total: 648.00
+Mes: 4 Total: 548.00
+Mes: 5 Total: 124.00
+Mes: 6 Total: 200.00
+Mes: 9 Total: 748.00
+Mes: 10 Total: 124.00
+Total anual: 2392.00
+ 
+Anio 1999
+Mes: 1 Total: 648.00
+Mes: 4 Total: 548.00
+Mes: 5 Total: 124.00
+Mes: 6 Total: 200.00
+Mes: 9 Total: 748.00
+Mes: 10 Total: 124.00
+Total anual: 2392.00
+ 
+Total Cliente: 4784.00
+---------------
+Datos del cliente
+Nombre:  Facu Apellido: Pere
+Detalle de ventas: 
+Anio 1992
+Mes: 1 Total: 648.00
+Mes: 4 Total: 548.00
+Mes: 5 Total: 124.00
+Mes: 6 Total: 200.00
+Mes: 9 Total: 748.00
+Mes: 10 Total: 124.00
+Total anual: 2392.00
+ 
+Anio 1999
+Mes: 1 Total: 648.00
+Mes: 4 Total: 548.00
+Mes: 5 Total: 124.00
+Mes: 6 Total: 200.00
+Mes: 9 Total: 748.00
+Mes: 10 Total: 124.00
+Total anual: 2392.00
+ 
+Total Cliente: 4784.00
+---------------
+Total Empresa: 20232.00
