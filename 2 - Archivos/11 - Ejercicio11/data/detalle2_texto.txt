@@ -1,0 +1,15 @@
+23 30 40 Buenos Aires
+23 30 50 Buenos Aires
+23 10 20 Buenos Aires
+34 22 34 Catamarca
+34 25 45 Catamarca
+34 2 56 Catamarca
+23 120 600 Jujuy
+23 103 300 Jujuy
+23 10 90 Jujuy
+23 50 60 Mendoza
+23 50 50 Mendoza
+23 10 90 Mendoza
+23 10 60 Tierra_del_Fuego
+23 10 20 Tierra_del_Fuego
+23 10 90 Tierra_del_Fuego

@@ -1,0 +1,15 @@
+23 30 40 Buenos Aires
+23 30 50 Buenos Aires
+23 10 20 Buenos Aires
+23 30 40 Chaco
+23 30 50 Chaco
+23 130 190 Chaco
+23 120 600 Jujuy
+23 103 300 Jujuy
+23 10 90 Jujuy
+23 50 60 Mendoza
+23 50 50 Mendoza
+23 10 90 Mendoza
+23 10 60 Neuquen
+23 10 20 Neuquen
+23 10 90 Neuquen

@@ -1,0 +1,7 @@
+30 40 Buenos Aires
+22 34 Catamarca
+30 40 Chaco
+120 600 Jujuy
+50 60 Mendoza
+10 60 Neuquen
+10 60 Tierra_del_Fuego
