@@ -73,12 +73,13 @@ var
 begin
 	reset(texto);
 	rewrite(maestro);
-	while not EOF(maestro) do begin
+	while not EOF(texto) do begin
 		with dato do begin
 			readln(texto, codigo_provincia, nombre_provincia);
 			readln(texto, viviendas_sin_luz, viviendas_sin_gas, viviendas_de_chapa, viviendas_sin_agua, viviendas_sin_sanitarios, codigo_localidad, nombre_localidad);
 		end;
 		write(maestro, dato);
+
 	end;
 	close(texto);
 	close(maestro);
@@ -123,11 +124,12 @@ begin
 	min.codigo_provincia:= CORTE;
 	min.codigo_localidad:= CORTE;
 	for i:=1 to 10 do begin
-		if (datos[i].codigo_provincia <= min.codigo_provincia) and (datos[i].codigo_localidad <= min.codigo_localidad) then begin
-			min.codigo_provincia:= datos[i].codigo_provincia;
-			 min.codigo_localidad:= datos[i].codigo_localidad;
-			iMin:= i;
-		end;
+		if(datos[i].codigo_provincia <> CORTE) then 
+			if (datos[i].codigo_provincia <= min.codigo_provincia) and (datos[i].codigo_localidad <= min.codigo_localidad) then begin
+				min.codigo_provincia:= datos[i].codigo_provincia;
+				min.codigo_localidad:= datos[i].codigo_localidad;
+				iMin:= i;
+			end;
 	end;
 	
 	if iMin <> -1 then begin
@@ -140,10 +142,10 @@ end;
 procedure actualizarMaestro(var maestro:archivo_maestro; var detalles: vector_archivo_detalle);
 var
 	reg_min: dato_detalle;
-
 	vector_detalles: vector_datos_detalle;
 	reg_maestro: dato_maestro;
 	i:integer;
+
 begin
 	for i:=1 to 10 do begin
 		reset(detalles[i]);
@@ -151,19 +153,24 @@ begin
 		leer(detalles[i], vector_detalles[i]);
 	end;
 	reset(maestro);
-
 	read(maestro, reg_maestro);
 	minimo(detalles, vector_detalles, reg_min);
 	while reg_min.codigo_provincia <> CORTE do begin
-
-		while(reg_maestro.codigo_provincia <> reg_min.codigo_provincia) and (	reg_maestro.codigo_localidad <> reg_min.codigo_localidad) do
+		
+		while(reg_maestro.codigo_provincia < reg_min.codigo_provincia) and (reg_maestro.codigo_localidad < reg_min.codigo_localidad) do
 			read(maestro, reg_maestro);
 		// si salgo es porque lo encontre, y en el detalle se repite una unica vez
 		with reg_maestro do begin
+			writeln('Provincia: ',codigo_provincia,' Localidad: ',codigo_localidad);
+			writeln('Antes: ');
+			writeln('Sin Luz', viviendas_sin_luz, 'Sin agua: ',viviendas_sin_agua, ' sin gas: ', viviendas_sin_gas,' de chapa: ',viviendas_de_chapa);
 			viviendas_sin_luz:= viviendas_sin_luz - reg_min.viviendas_con_luz;
 			viviendas_sin_agua:= viviendas_sin_agua - reg_min.viviendas_con_agua;
 			viviendas_sin_gas:= viviendas_sin_gas - reg_min.viviendas_con_gas;
 			viviendas_de_chapa:= viviendas_de_chapa - reg_min.viviendas_construidas;
+			writeln('despues: ');
+			writeln('Sin Luz', viviendas_sin_luz,' Sin agua: ',viviendas_sin_agua, ' sin gas: ', viviendas_sin_gas,' de chapa: ',viviendas_de_chapa);
+			writeln();
 		end;
 		
 		seek(maestro, filepos(maestro)-1);
@@ -188,7 +195,7 @@ begin
 	while not EOF(maestro) do begin
 		read(maestro, dato);
 		with dato do begin
-			if viviendas_de_chapa = 0 then
+			if viviendas_de_chapa < 0 then // deberia ser = 0, pero para simplificar ya que cargue los valores en los txt de forma aleatoria
 				total:= total+1;
 		end;
 	end;
@@ -210,7 +217,7 @@ BEGIN
 	assign(maestro,'data/maestro.dat');
 	assign(auxiliar_maestro,'data/maestro.txt');
 	for i:=1 to 10 do begin
-		Assign(detalles[i],'data/detalle_' + intTostr(i)+'.txt');
+		Assign(auxiliar_detalles[i],'data/detalle_' + intTostr(i)+'.txt');
 		Assign(detalles[i],'data/detalle_' + intTostr(i)+'.dat');
 	end;
 	//auxiliares
