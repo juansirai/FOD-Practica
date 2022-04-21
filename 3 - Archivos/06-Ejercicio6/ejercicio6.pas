@@ -81,11 +81,12 @@ begin
 	while not EOF(eliminadas) do begin
 		read(eliminadas, cod_baja);
 		{supongo que el codigo existe en el maestro}
+		seek(arch, 0);                                // como el maestro no está ordenado, ni el detalle tampoco, en cada iteración reseteo.
 		read(arch, dato);
 		while dato.cod_prenda <> cod_baja do 
 			read(arch, dato);
 		{al salir del while es porque encontre, entonces llevo el stock a negativo}
-		dato.stock:= dato.stock * -1;
+		dato.stock:= dato.stock * (-1);
 		seek(arch, filepos(arch)-1);
 		write(arch, dato);
 	end;	
@@ -99,18 +100,31 @@ var
 	auxiliar: maestro;
 	dato: prenda;
 begin
-	Assign(auxiliar, 'temp/aux.dat');
+	Assign(auxiliar, 'data/auxiliar.dat');
 	rewrite(auxiliar);
 	reset(arch);
 	while not EOF(arch) do begin
 		read(arch, dato);
-		if dato.stock<0 then
+		if dato.stock>0 then begin																{Escribimos solo los que tienen stock positivo}
 			write(auxiliar, dato);
+		end;
 	end;
 	close(auxiliar);
+	writeln('El archivo se ha eliminado exitosamente');
+	Assign(arch, 'data/auxiliar.dat');                                                       {Cambiamos la referencia}
+end;
+
+{imprime archivo}
+procedure imprimir(var arch:maestro);
+var
+	dato:prenda;
+begin
+	reset(arch);
+	while not EOF(arch) do begin
+		read(arch, dato);
+		writeln('Codigo: ', dato.cod_prenda,' Descripcion: ', dato.descripcion, '  Colores: ', dato.colores, '   Tipo: ', dato.tipo_prenda, '   Stock:  ',dato.stock,'   Precio: ',dato.precio:1:2);
+	end;
 	close(arch);
-	{cambio la referencia}
-	Assign(auxiliar, 'data/maestro.dat');
 end;
 
 {--------------------------------------------------------------------------------------------------------}
@@ -121,14 +135,23 @@ VAR
 		eliminadas: file_eliminadas;
 BEGIN
 	Assign(arch, 'data/maestro.dat');
-	Assign(texto, 'data/maestro.text');
+	Assign(texto, 'data/maestro1.txt');
 	Assign(eliminadas, 'data/eliminadas.dat');
 
 	generarMaestro(arch, texto);
+	writeln('Imprimimos el archivo actual: ');
+	imprimir(arch);
 	generarFileEliminadas(eliminadas);
-	
+
 	bajaLogica(arch, eliminadas);
+	writeln();
+	writeln('Imprimimos el archivo despues de la baja logica: ');
+	imprimir(arch);
+	
 	bajaFisica(arch);
+	writeln();
+	writeln('Imprimimos el archivo despues de la baja fisica: ');
+	imprimir(arch);
 	
 END.
 

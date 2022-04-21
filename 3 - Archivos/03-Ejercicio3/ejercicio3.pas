@@ -203,14 +203,19 @@ end;
 
 
 procedure listarNovelas(var arch:archivo);
+{ Listar en un archivo de texto todas las novelas, incluyendo las borradas, que
+representan la lista de espacio libre. El archivo debe llamarse “novelas.txt}
 var
 	n:novela;
+	texto : text;
 begin
+	assign(texto,'data/novelas.txt');
 	reset(arch);
 	while not EOF(arch) do begin
 		read(arch, n);
 		with n do begin
-			writeln('Codigo: ',codigo,'  |  Genero : ',genero,' | Nombre : ',nombre, '   |   Duracion: ',duracion, ' |  Director:  ',director, '    |  Precio: ', precio:1:2);
+			writeln(texto,codigo,' ',genero);
+			writeln(texto,nombre, ' ',duracion, ' ',precio,' ',director);
 		end;
 	end;
 	close(arch);
