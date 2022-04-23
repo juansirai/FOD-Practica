@@ -18,10 +18,10 @@ lee por teclado. Para marcar una distribución como borrada se debe utilizar el 
 cantidad de desarrolladores para mantener actualizada la lista invertida. Para verificar
 que la distribución a borrar exista debe utilizar el módulo ExisteDistribucion. En caso de no
 existir se debe informar “Distribución no existente”.
-   
-   
 }
 
+{PROBLEMA: al pasar del archivo de texto al .dat, el nombre se lee con un espacio en blanco de mas. Ver por qué.
+Tratar de hacer el código más eficiente y legible..  repensar los reset}
 
 program ejercicio8;
 
@@ -44,14 +44,18 @@ var
 	encontre:boolean;
 	dato: distribucion;
 begin
-	reset(arch);
+	//reset(arch);
 	encontre:=false;
 	while not EOF(arch) and not encontre do begin
 		read(arch, dato);
+		writeln(dato.nombre,'-');
+		writeln(nombre, '-');
+		writeln(dato.nombre= nombre);
+		
 		if(dato.nombre = nombre) then
 			encontre:=true;
 	end;
-	close(arch);
+	//close(arch);
 	existeDistribucion:= encontre;
 end;
 
@@ -84,7 +88,7 @@ begin
 	
 	writeln('Bienvenido al alta de distribuciones: ');
 	leerDistribucion(arch, dato_nuevo, exito);                 
-	                                                                                                                                      
+	seek(arch, 0);																													{ya que en el buscar queda desposicionado}                                                                                                                                      
 	if exito then begin																										{me fijo si la distribucion ya existe}
 		read(arch, indice);
 		if(indice.desarrolladores<0) then begin
@@ -121,6 +125,7 @@ begin
 	reset(arch);
 	write('Nombre de distribucion a borrar: ');readln(nombre_baja);
 	if existeDistribucion(arch, nombre_baja) then begin
+		seek(arch, 0);
 		read(arch, dato_baja);
 		while dato_baja.nombre <> nombre_baja do													{ya se que existe}
 			read(arch, dato_baja);
@@ -157,15 +162,47 @@ begin
 	close(arch);
 end;
 
+procedure imprimir(var arch:maestro);
+var
+	dato:distribucion;
+begin
+	reset(arch);
+	while not eof(arch) do begin
+		read(arch, dato);
+		writeln(dato.anio,' ',dato.nombre,' ',dato.version, ' ',dato.desarrolladores,' ',dato.descripcion);
+	end;
+	
+	close(arch);
+end;
+
+procedure menu(var s:char);
+begin
+	writeln('Bienvenido al menu principal');
+	writeln('a - agregar distribucion');
+	writeln('b - eliminar distribucion');
+	writeln('c-imprimir distribucion');
+	writeln('d-salir');
+	readln(s);
+end;
 {####################################################}
 VAR
 	archivo:maestro;
 	texto:text;
+	s:char;
 BEGIN
 	assign(archivo, 'data/maestro.dat');
 	assign(texto, 'data/maestro.txt');
 	generarMaestro(archivo, texto);
-	
-	
+	menu(s);
+	while s <>'d' do begin
+		case s of
+			'a': altaDistribucion(archivo);
+			'b': bajaDistribucion(archivo);
+			'c': imprimir(archivo);
+			'd':writeln('Gracias por operar');
+		end;
+		menu(s);
+	end;
+
 END.
 
