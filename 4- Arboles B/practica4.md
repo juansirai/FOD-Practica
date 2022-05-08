@@ -148,3 +148,59 @@ La `redistribución` se aplica en los casos de underflow, y la condición necesa
 La `Fusion`, se da en aquellos casos en que el hermano adyacente no puede ceder elementos, ya que quedaría en underflow, por lo cual:
 * se fusionan ambos nodos
 * en algunos casos puede disminuir la altura del arbol.
+
+**5. Dado el siguiente árbol B de orden 5, mostrar como quedaría el mismo luego de
+realizar las siguientes operaciones: +320, -390, -400, -533. Justificar detalladamente
+cada operación indicando lecturas y escrituras en orden de ocurrencia. Para la
+resolución de underflow debe utilizar política a izquierda. Graficar cada operación por
+separado.**
+
+Estado inicial:
+
+<img src="img/ejercicio5_1.png" width=800>
+
+<br>`+320:`
+
+Los pasos que realiza son:
+* Leo nodo 2
+* Leo nodo 1
+* Escribo nodo 1. Como el nodo 1 no tiene más lugar, entro en overflow.
+* Creo el nodo 6
+* Las claves 225 y 241 se quedan en el nodo 1, la clave 320 asciende como padre, y escribo las claves 331 y 360 en el nodo 6.
+* Al ascender la clave 320, se produce overflow en el nodo 2.
+* Creo un nuevo nodo 7, las claves 220 y 225 se quedan en el nodo 2, creo un nuevo nodo 8 y asciendo la clave 320, luego las claves 445 y 541 van al nodo 7.
+
+<img src="img/ejercicio5_2.png" width=800>
+
+<br>`-390:`
+
+* Leo nodo 8
+* Intercambio el 390 por el mas pequeño del subarbol derecho:
+  * Leo nodo 4, e intercambio 390 por 400
+* Elimino el 390 del nodo 4, como M es 5, la cantidad minima de elementos es 1. Con lo cual el nodo 4 NO entra en underflow.
+<img src="img/ejercicio5_3.png" width=800>
+
+<br>`-400:`
+
+* Leo el nodo 8
+* Intercambio el 400 por el minimo de su arbol derecho (407). Para lo cual leo el nodo 7 y leo el nodo 4. Escribo nodo 4 y nodo 8
+* Elimino el 400 del nodo 4, entro en underflow.
+* Si bien estoy con política izquierda, como no tengo hermano izquierdo debo ir a la derecha.
+* El nodo 5 puede redistribuir sin entrar en underflow, asi que:
+  * Baja el 455 al nodo 4
+  * Sube el 508 al nodo 7.
+
+L8 - L7 - L4 - L5 - E4 - E5 - E7 - E8
+
+<img src="img/ejercicio5_4.png" width=800>
+
+<BR>`-533`
+
+L8 - L7 - L5 - L3 - E4 - E7
+
+* Leo el nodo 8
+* Leo el nodo 7
+* Leo el nodo 5 y elimino el 533
+* Como el N5 entra en underflow, intento redistribuir por izquierda. Dado que el N4 entra en underflow, lo fusiono con el nodo 5. Para lo cual debo bajar el elemento separador 508 y escribirlo en el N4.
+
+<img src="img/ejercicio5_5.png" width=800>
