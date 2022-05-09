@@ -204,3 +204,72 @@ L8 - L7 - L5 - L3 - E4 - E7
 * Como el N5 entra en underflow, intento redistribuir por izquierda. Dado que el N4 entra en underflow, lo fusiono con el nodo 5. Para lo cual debo bajar el elemento separador 508 y escribirlo en el N4.
 
 <img src="img/ejercicio5_5.png" width=800>
+
+
+<br>**6. Dado el siguiente árbol B de orden 4, mostrar cómo quedaría el mismo luego de realizar
+las siguientes operaciones: +5, +9, +80, +51, -50, -92.
+Política de resolución de underflows: derecha.**
+
+<img src="img/ejercicio6.png" width=800>
+
+<br>`+5`
+
+L2 L0 E2 E0 E4
+* Leo el nodo 2
+* Leo el nodo 0
+* Escribo el nodo 0 y entro en overflow: 5 22 32 50
+* Creo el nodo 3
+* 5 y 22 quedan en el nodo 0, 32 es promovido a padre, 50 queda en nodo 3.
+
+<img src="img/ejercicio6_1.png" width=800>
+
+<br>`+9`
+
+L2 L0 E0
+
+* Leo nodo 2
+* Leo nodo 0
+* Escribo nodo 0, no hay riesgo de overflow.
+
+<img src="img/ejercicio6_2.png" width=800>
+
+<br>`+80`
+
+L2 L1 E2 E1 E4
+
+* leo nodo 2
+* Leo nodo 1
+* Escribo el 80 en el nodo 1, quedando en Overflow
+* Creo el nodo 4, y redistribuyo: 77 79 80 92
+* 77 y 79 quedan en el nodo 1, 80 asciende como padre, 92 se escribe en el nodo 4
+
+<img src="img/ejercicio6_3.png" width=800>
+
+<br>`+51`
+
+L2 L3 E3
+* Leo nodo 2
+* Leo nodo 3
+* Escribo nodo 3
+
+<img src="img/ejercicio6_4.png" width=800>
+
+<br>`-50`
+
+L2 L3 E3
+* Leo el nodo 2
+* Leo el nodo 3
+* Elimino el 50, quedando solamente el 51. Dado que la cantidad minima de elementos es 0, estoy OK.
+
+<img src="img/ejercicio6_5.png" width=800>
+
+<br>`-92`
+
+L2 L4 L1 E1 E4 E2
+
+* Leo nodo 2
+* Leo nodo 4
+* Elimino 92, quedo en underflow.
+* Por politica derecha, redistribuyo con nodo1 bajando el elemento separador y subiendo el 79 al nodo 2.
+
+<img src="img/ejercicio6_6.png" width=800>
