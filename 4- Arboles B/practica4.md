@@ -450,3 +450,141 @@ Al dar de alta el 12, el nodo 0 entra en overflow. Es por ello que debo crear un
 LE/E: L2, L0, E0, E1, E2
 
 <img src="img/ejercicio9_5.png" width=800>
+
+----------------------------------------------------------
+
+10. Dada las siguientes operaciones, mostrar la construcción paso a paso de un árbol B de
+orden 4: +50 , +70, +40, +15, +90, +120, +115, +45, +30, +100, +112, +77, -45, -40, -50, -90, -100.<br>
+Política de resolución de underflows: izquierda o derecha.
+
+`+50 , +70, +40`
+<img src="img/ejercicio10_1.png" width=800>
+
+<br>`+15`
+
+Al dar de alta el 15, el nodo 0 entra en overflow, con lo cual:
+* Creo el nodo 1
+* Separo 15 y 40 en nodo 0, 70 en nodo 1
+* Creo el nodo 2
+* Asciendo el 50 como padre
+
+LE/E = L0, E0, E1, E2
+
+<img src="img/ejercicio10_2.png" width=800>
+
+<br>`+90, +120`
+
+Tanto el 90 como el 120 pueden insertarse sin problemas en el nodo 1.
+
+LE/E = L2, L1, E1
+
+<img src="img/ejercicio10_3.png" width=800>
+
+<br>`+115`
+
+Al dar de alta el 115, el nodo 1 entra en overflow.
+De esta forma se crea el nodo 3, se separa el 70 y 90 en nodo 1, 120 en nodo 3, y 115 sube como padre al nodo 2.
+
+LE/E = L2, L1, E1, E3, E2
+
+<img src="img/ejercicio10_4.png" width=800>
+
+<br>`+45`
+
+El 45 entra sin problemas en el nodo 0
+
+<img src="img/ejercicio10_5.png" width=800>
+
+<br>`+30`
+
+Al dar de alta el 30, el nodo 0 entra en overflow.
+
+De esta manera, se genera el nodo 4, y se divide:
+* Nodo 0: 15 y 30
+* Nodo 4: 45
+* Nodo 2: 40
+
+LE/E: L2, L0, E0, E4, E2
+
+<img src="img/ejercicio10_6.png" width=800>
+
+<br>`+100`
+
+El 100 ingresa sin problemas en el nodo 1
+
+<img src="img/ejercicio10_7.png" width=800>
+
+<br>`+112`
+
+Al dar de alta el 112, el nodo 1 entra en overflow:
+* creo el nodo 5
+* separo 70 y 90 en nodo 1, 100 en nodo 5, subo el 112 al 2.
+
+Al subir el 112, el nodo 2 entra en overflow:
+* Creo el nodo 6
+* 40 y 50 quedan en nodo 2
+* 115 va al nodo 6
+* Creo el nodo 7 y sube 112 como padre.
+
+<img src="img/ejercicio10_8.png" width=800>
+
+<br>`+77`
+
+El 77 se da de alta sin problemas en el nodo 1.
+
+<img src="img/ejercicio10_9.png" width=800>
+
+<br>`-45`
+
+Al dar de baja el 45, el nodo 4 entra en underflow. Por política, debemos intentar redistribuir con su hermano adyacente izquierdo, el cual puede hacerlo sin mayores inconvenientes.
+
+El 45 se elimina, baja el elemento separador 40, y el 30 pasa al nodo 2.
+
+LE/E: L7, L2, L4, L0, E0, E4, E2
+
+<img src="img/ejercicio10_10.png" width=800>
+
+<br>`-40`
+
+Al dar de baja el 40, el nodo 4 entra en underflow. Por politica, veo si puedo redistribuir con el nodo 0. Como no es posible, miro si puedo distribuir con el nodo 1.
+
+En este caso puede hacerse la redistribucion sin mayores inconvenientes, con lo cual:
+* Se elimina el 40
+* Baja el 50
+* Sube el 70 como elemento separador.
+
+LE/E = L7, L2, L4, L0, L1, E4, E1, E2
+
+<img src="img/ejercicio10_11.png" width=800>
+
+<br>`-50`
+
+Es similar al caso anterior, no puedo redistribuir con el hno izquierdo, con lo cual lo hago con el derecho.
+
+LE/E: L7,L2 L4, L0, L1, E4, E1, E2
+
+<img src="img/ejercicio10_12.png" width=800>
+
+<br>`-90`
+
+Al dar de baja el 90, el nodo 1 entra en underflow. Independientemente de la politica, como el unico hermano que tiene es el izquierdo, intento redistribuir con él.
+
+Como el nodo 4 quedaría en underflow, la unica opcion que queda es la fusion, liberando al nodo1.
+
+LE/E: L7, L2, L1, L4, E4, E1, E2
+
+<img src="img/ejercicio10_13.png" width=800>
+
+<br>`-100`
+
+Al dar de baja el 100, el nodo 5 queda en underflow. Como no tiene hermano izquierdo, si o si debe mirar al hermano derecho, quien al no poder redistribuir fusiona.
+
+Al bajar el elemento separador del 6, el nodo 6 queda en underflow y debe fusionarse con el nodo 2.
+
+El elemento separador del nodo 7 baja, y el arbol reduce un nivel.
+
+ACLARACION -> durante todo el ejercicio, el elemento del nodo 7 es el 100 y no el 115. Luego el 112 debería haber estado siempre en el nodo 5.
+
+LE/E: L7, L6, L5, L3, E5, E3, E6, L2, E2, E7.
+
+<img src="img/ejercicio10_14.png" width=800>
