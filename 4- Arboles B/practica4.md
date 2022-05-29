@@ -41,6 +41,7 @@ De estos datos, los que podrían elegirse como clave son:
 
 Dado que son campos únicos (no deberían repetirse en los alumnos), y ademos al ser enteros son ordinales, con lo que podemos utilizarlos para ir construyendo los nodos.
 
+----------------------------------------------------------
 
 **<span style="color: green"> 2. Redefinir la estructura de datos del ejercicio anterior para un árbol B+ de orden M.
 Responda detalladamente:</span>**
@@ -90,6 +91,7 @@ b- En caso de buscar al alumno por su nombre, debería aprovecharse el acceso se
 c- La ventaja de la búsqueda por clave, es que reducimos el tiempo del algoritmo, ya que a medida que hacemos las comparaciones con la raíz podemos ir descartando sub-arboles.<br>
 En el otro caso, el tiempo de búsqueda es lineal.
 
+-----------------------------------------------------------
 
 **<span style="color: green">3. Dado el siguiente algoritmo de búsqueda en un árbol B:**
 
@@ -118,6 +120,7 @@ end;
 <span style="color: green">c. ¿Existe algún error en este código? En caso afirmativo, modifique lo que considere
 necesario.</span>
 
+-----------------------------------------------------------------
 
 **<span style="color: green">
 4-Defina los siguientes conceptos:**</span>
@@ -148,6 +151,8 @@ La `redistribución` se aplica en los casos de underflow, y la condición necesa
 La `Fusion`, se da en aquellos casos en que el hermano adyacente no puede ceder elementos, ya que quedaría en underflow, por lo cual:
 * se fusionan ambos nodos
 * en algunos casos puede disminuir la altura del arbol.
+
+--------------------------------------------------------------
 
 **5. Dado el siguiente árbol B de orden 5, mostrar como quedaría el mismo luego de
 realizar las siguientes operaciones: +320, -390, -400, -533. Justificar detalladamente
@@ -205,6 +210,8 @@ L8 - L7 - L5 - L3 - E4 - E7
 
 <img src="img/ejercicio5_5.png" width=800>
 
+
+-----------------------------------------------------------------
 
 <br>**6. Dado el siguiente árbol B de orden 4, mostrar cómo quedaría el mismo luego de realizar
 las siguientes operaciones: +5, +9, +80, +51, -50, -92.
@@ -273,3 +280,75 @@ L2 L4 L1 E1 E4 E2
 * Por politica derecha, redistribuyo con nodo1 bajando el elemento separador y subiendo el 79 al nodo 2.
 
 <img src="img/ejercicio6_6.png" width=800>
+
+
+-------------------------------------------------------
+7. Dado el siguiente árbol B de orden 6, mostrar como quedaría el mismo luego de realizar
+las siguientes operaciones: +15, +71, +3, +48, -56, -71.
+Política de resolución de underflows: derecha o izquierda.
+
+0: (34) (56) (78) (100) (176)
+
+`+15`
+
+Al agregar el 15, el nodo 0 entra en overflow, por lo tanto se deben separar los elementos.
+
+* 15 34 56  quedan en el nodo izquierdo
+* 100 176 quedan en el nodo derecho
+* 78 asciende como padre
+
+LE/E necesarias: L0, E0, E1, E2.
+
+<img src="img/ejercicio7_1.png" width=800>
+
+<br>`+71`
+
+El 71 ingresa sin problemas en el nodo 0.
+
+LE/E necesarias: L2, L0, E0.
+
+<img src="img/ejercicio7_2.png" width=800>
+
+<br>`+3`
+
+De igual manera, el 3 ingresa en el nodo 0 sin problemas
+
+LE/E: L2, L0, E0.
+
+<img src="img/ejercicio7_3.png" width=800>
+
+<br>`+48`
+
+Al agregar el 48, el nodo 0 entra en overflow, con lo cual debemos proceder a solucionarlo:
+* Tenemos: 3 - 15 - 34 - 48 - 56 - 71
+* Nodo izquierdo: 3 - 15 - 34
+* Se crea el nodo 3 y van el 56 y 71
+* El 48 sube como padre al nodo 2
+
+LE/E necesarias: L2, L0, E0, E3, E2
+
+<img src="img/ejercicio7_4.png" width=800>
+
+<BR>`-56`
+
+Al restar el 56, el nodo 3 entra en underflow (ya que debe tener como mínimo 6/2 - 1 = 1 hijos)
+
+La política de resolución de underflow es derecha o izquierda, con lo cual:
+* Veo si puedo redistribuir con el 1 -> NO
+* Veo si puedo redistribuir con el 0 -> SI
+* Redistribuyo
+
+LE/E necesarias: L2, L3, E0, E3, E2
+
+<img src="img/ejercicio7_5.png" width=800>
+
+<br>`-71`
+
+Al eliminar el 71 del nodo 3, el mismo entra en underflow, y de acuerdo a la política:
+* Veo si puedo redistribuir con nodo 1 -> NO
+* Veo si puedo redistribuir con nodo 0 -> NO
+* Fusiono con nodo 1
+
+LE/E necesarias: L2, L3, L1, L0, E3, E1, E2
+
+<img src="img/ejercicio7_6.png" width=800>
