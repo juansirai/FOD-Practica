@@ -352,3 +352,58 @@ Al eliminar el 71 del nodo 3, el mismo entra en underflow, y de acuerdo a la pol
 LE/E necesarias: L2, L3, L1, L0, E3, E1, E2
 
 <img src="img/ejercicio7_6.png" width=800>
+
+---------------------------------------------------
+
+8. Dado el siguiente árbol B de orden 5, mostrar como quedaría el mismo luego de realizar las siguientes operaciones: +450, -485, -511, -614. Política de resolución de underflows: derecha.
+
+<img src="img/ejercicio8_1.png" width=800>
+
+<br>`+450`
+
+
+Para dar de alta el 450, el nodo 1 queda en overflow, con lo cual:
+* Creo el nodo 6
+* Queda 333 y 390 en nodo 1
+* Queda 450 y 454 en nodo 6
+* 442 sube como padre al nodo 2
+
+Al subir el 442, el nodo 2 entra en overflow, con lo cual:
+* creo el nodo 7
+* Queda 315 y 442 en nodo 2
+* Queda 541 y 639 en nodo 7
+* Creo el noddo 8 y sube el 485 como padre
+
+<img src="img/ejercicio8_2.png" width=800>
+
+<br>`-485`
+
+El 485 se encuentra en la raíz, con lo cual para proceder a su baja debemos:
+* Intercambiar el 485 con el 508 (menor de sus hijos de la rama derecha)
+* Dar de baja el 485 desde el nodo 4, como mantiene 1 elemento no entra en underflow.
+
+LE/E necesarias: L8, L7, L4, E4, E8
+
+<img src="img/ejercicio8_3.png" width=800>
+
+<br>`-511`
+
+Al dar de baja el 511, el nodo 4 entra en undeflow. Como la política de resolución de underflow es derecha, me fijo con el nodo 5 (hno adyacente derecho si puedo redistribuir)
+
+Como la redistribución es posible, me quedaría el 547 en nodo 4, 614 como nuevo elemento separador y 633 como nodo 5.
+
+LE/E: L8, L7, L4, L5, E4, E5, E7
+
+<img src="img/ejercicio8_4.png" width=800>
+
+<br>`-614`
+
+Para dar de baja el 614, debemos moverlo primero a una hoja. Con lo cual intercambiamos el 547 por el 614, quien nos queda en el nodo 4.
+
+El nodo 4 quedaría en underflow, con lo cual siguiendo la política de resolución debo ver al hermano adyacente derecho, el cual al no poder redistribuir cargas se debe fusionar.
+
+LE/E necesarias: L8, L7, L4, L5, E4, E5, E7.
+
+<img src="img/ejercicio8_5.png" width=800>
+
+----------------------------------------------------------
