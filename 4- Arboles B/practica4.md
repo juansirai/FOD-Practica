@@ -398,12 +398,55 @@ LE/E: L8, L7, L4, L5, E4, E5, E7
 
 <br>`-614`
 
-Para dar de baja el 614, debemos moverlo primero a una hoja. Con lo cual intercambiamos el 547 por el 614, quien nos queda en el nodo 4.
+Para dar de baja el 614, debemos moverlo primero a una hoja. Con lo cual intercambiamos el 547 por el 633, quien nos queda en el nodo 5.
 
-El nodo 4 quedaría en underflow, con lo cual siguiendo la política de resolución debo ver al hermano adyacente derecho, el cual al no poder redistribuir cargas se debe fusionar.
+El nodo 5 quedaría en underflow, con lo cual siguiendo la política de resolución debo ver al hermano adyacente derecho, con el cual puedo fusionar tranquilamente
 
-LE/E necesarias: L8, L7, L4, L5, E4, E5, E7.
+LE/E necesarias: L8, L7, L5, L3,  E4, E5, E3, E7.
 
 <img src="img/ejercicio8_5.png" width=800>
 
 ----------------------------------------------------------
+
+
+9. Dado un árbol B de orden 5  y con política izquierda, para cada operación dada:
+* a. Dibuje el árbol resultante
+* b. Explique las decisiones tomadas
+* c. Escriba las lecturas y escrituras
+
+Operaciones: -76, -400, +900, +12
+
+<img src="img/ejercicio9_1.png" width=800>
+
+<br>`-76`
+
+Para dar de baja el 76, debo bajarlo al nivel de hojas, y para eso lo reemplazo por el menor de su subarbol derecho. En este caso por el 100 en el nodo 4.
+
+Luego, el nodo 4 queda con 76 y 200. Al eliminar el 76, el nodo NO entra en underflow, con lo cual no tenemos que hacer mayores cambios.
+
+LE/E: L2, L4, E4, E2
+
+<img src="img/ejercicio9_2.png" width=800>
+
+<br>`-400`
+
+Al dar de baja el 400, el nodo 1 queda en underflow.
+Como tengo politica izquierda, intento redistribuir con el nodo 4. Al no poder hacerlo, fusiono el nodo 4 y bajo el elemento separador.
+
+LE/E : L2, L1, L4, E4, E1, E2
+
+<img src="img/ejercicio9_3.png" width=800>
+
+<br>`+900`
+
+El 900 lo doy de alta en el nodo 3, no hay mayores inconvenientes.
+
+<img src="img/ejercicio9_4.png" width=800>
+
+<br>`+12`
+
+Al dar de alta el 12, el nodo 0 entra en overflow. Es por ello que debo crear un nuevo nodo (reutilizo el 1), y nos quedan 12 y 21 en el nodo 0, 46 y 70 en el 1, y sube el 45 al nodo 2
+
+LE/E: L2, L0, E0, E1, E2
+
+<img src="img/ejercicio9_5.png" width=800>
