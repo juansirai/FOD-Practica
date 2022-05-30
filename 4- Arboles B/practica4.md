@@ -588,3 +588,173 @@ ACLARACION -> durante todo el ejercicio, el elemento del nodo 7 es el 100 y no e
 LE/E: L7, L6, L5, L3, E5, E3, E6, L2, E2, E7.
 
 <img src="img/ejercicio10_14.png" width=800>
+
+------------------------------------------------------------
+
+11. Dadas las siguientes operaciones, mostrar la construcción paso a paso de un árbol B de
+orden 5:
+
+Política de resolución de underflows: izquierda.
+
++80, +50, +70, +120, +23, +52, +59, +65, +30, +40, +45, +31, +34, +38, +60, +63, +64, -23,
+-30, -31, -40, -45, -38.
+
+
+`+80, +50, +70, +120, +23`
+
+Los primeros 4 elementos se insertan sin problemas en el nodo 0.
+
+Luego, al intentar insertar el 23, el nodo 0 entra en overflow, con lo cual:
+* Se crea el nodo 1
+* Se distribuye:
+  * 23 y 50 en nodo 0
+  * 80 y 120 en nodo 1
+* Se crea nodo 2 y asciende 70 como padre
+
+
+<img src="img/ejercicio11_1.png" width=800>
+
+<br>`+52, +59`
+
+Se insertan sin problemas en el nodo 0
+
+
+<img src="img/ejercicio11_2.png" width=800>
+
+<br>`+65`
+
+Al insertar el 65 en el nodo 0, el mismo entra en overflow.
+
+Se crea entonces el nodo 3:
+* 23 y 50 permanecen en nodo 0
+* 52 sube al nodo 2 como nuevo elemento separador
+* 59 y 65 quedan en el nuevo nodo 3
+
+LE/E: L2, L0, E0, E3, E2
+
+<img src="img/ejercicio11_3.png" width=800>
+
+<br>`+30 +40`
+
+Los elementos 30 y 40 ingresan sin mayores inconvenientes en el nodo 0
+
+<img src="img/ejercicio11_4.png" width=800>
+
+<br>`+45`
+
+Al ingresar el 45, el nodo 0 entra en overflow.
+
+De esta forma se crea el nodo4, y se distribuye:
+* 23 y 30 quedan en el nodo 0
+* 40 sube como elemento separador al nodo 2
+* 45 y 50 van al nuevo nodo
+
+LE/E: L2, L0, E0, E4, E2
+
+<img src="img/ejercicio11_5.png" width=800>
+
+<br>`+31 +34`
+
+Ambos elementos pueden ingresarse sin problemas en el nodo 0
+
+<img src="img/ejercicio11_6.png" width=800>
+
+<br>`+38`
+
+Al ingresar el 38, el nodo 0 entra en overflow:
+* Se crea el nodo 5
+* Quedan el 23 y 30 en el nodo 0
+* Van el 34 y 38 al nodo 5
+* Sube el 31 al nodo 2 como nuevo elemento separador.
+
+LE/E: L2, L0, E0, E5, E2
+
+<img src="img/ejercicio11_7.png" width=800>
+
+<br>`+60 +63`
+
+Ambos elementos se añaden sin problemas en el nodo 3.
+
+<img src="img/ejercicio11_8.png" width=800>
+
+<br>`+64`
+
+Al ingresar el 64, el nodo 3 entra en overflow
+
+Es por eso que:
+* Se crea nodo 6
+* Se distribuye 59 y 60 en nodo 3, 63 sube al nodo 2 y 64 y 65 van al nodo 6
+* Al subir el 63, el nodo 2 entra en overflow:
+  * Se crea nodo 7
+  * se distribuye 31 y 40 en nodo 2
+  * 63 y 70 en nodo 7
+  * Se crea nodo 8 y sube el 52 como padre
+
+L2 , L3 , E3, E6, E2, E7, E8
+
+<img src="img/ejercicio11_9.png" width=800>  
+
+<br>`-23`
+
+La baja del 23 se hace sin mayores inconvenientes, ya que el nodo 0 no entra en underflow.
+
+L8, L2, L0, E0
+
+<img src="img/ejercicio11_10.png" width=800>  
+
+<br>`-30`
+
+Al dar de baja el 30, el nodo 0 entra en underflow. Como no tiene hijo izquierdo, redistribuye con el hijo derecho, más allá de la política.
+
+L8, L2, L0, E0, E5, E2
+
+<img src="img/ejercicio11_11.png" width=800>
+
+
+<br>`-31`
+
+Al dar de baja el 31, el nodo 0 entra en underflow. Como no tiene hermano izquierdo, si o si debe mirar a su hermano derecho.
+
+Dado que el hermano derecho no puede ceder elementos, se deben fusionar, quedando libre el nodo 5.
+
+L8, L2, L0, E0, E5, E2
+
+<img src="img/ejercicio11_12.png" width=800>
+
+<br>`-40`
+
+Para dar de baja el 40, debo reemplazarlo por el menor de sus elementos del subarbol derecho, en este caso el 45.
+
+Puedo borrar luego sin inconvenientes.
+
+L8, L2, L4, E4, E2
+
+<img src="img/ejercicio11_13.png" width=800>
+
+<br>`-45`
+
+Para eliminar el 45, debo reemplazarlo por el menor de sus hijos del subarbol derecho, en este caso el 50.
+
+Una vez que tengo al 45 en el nodo 4, al eliminarlo entro en underflow.
+
+Por politica, debo mirar al hermano adyacente izquierdo, en este caso el nodo 0, quien puede redistribuir sin problemas.
+
+L8, L2, L4, L0, E0, E4, E2
+
+<img src="img/ejercicio11_14.png" width=800>
+
+<br>`-38`
+
+Como el 38 no esta en una hoja, debo intercambiarlo con el 50
+
+Al dar de baja el 38 en el nodo 4, el mismo entra en underflow. Por politica intento redistribuir con el nodo 0, pero como no puedo fusiono.
+
+Al fusionar baja el elemento separador 50, y el nodo 2 entra en underflow.
+
+Como no tengo hermano izquierdo, si o si miro al derecho, con el cual puedo redistribuir sin problemas.
+
+De esta forma queda el 52 en el nodo 2, el 63 como nuevo padre.
+
+L8, L2, L4, L0, E0, L7,  E2, E7, E8
+
+<img src="img/ejercicio11_15.png" width=800>
