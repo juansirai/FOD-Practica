@@ -798,3 +798,112 @@ El 400 no existe como elemento real, con lo cual lo que sucede es:
 * Leo nodo 1
 * Aprovecho el acceso secuencia para ir al nodo 2
 * No encuentro el 400
+
+
+-------------------------------------------------------------------
+
+15. Dado el siguiente árbol B+ de orden 4, mostrar como quedaría el mismo luego de
+realizar las siguientes operaciones: +120, +110, +52, +70, +15, -45, -52, +22, +19, -66, -22, -19,-23, -89.
+
+Política de resolución de underflows: derecha.
+
+<img src="img/ejercicio15_1.png" width=800>
+
+
+<br>`+120`
+
+Al agregar el 120, el nodo 1 entra en overflow, con lo cual:
+* Se crea el nodo 3
+* Se distribuye 66 y 67 en nodo 1, 89 y 120 en nodo 3
+* Se sube copia del 89 al nodo 2
+
+<img src="img/ejercicio15_2.png" width=800>
+
+<br>`+110, +52, +70`
+
+Los tres valores ingresan sin problemas en los nodos 0, 1, 3
+
+<img src="img/ejercicio15_3.png" width=800>
+
+<br>`+15`
+
+Al ingresar el 15, el nodo 0 entra en overflow, con lo cual:
+* Se crea el nodo 4
+* Se distribuye: 15 y 23 en nodo 0, 45 y 52 en nodo 4, se sube copia del 45 al nodo 2
+
+<img src="img/ejercicio15_4.png" width=800>
+
+<br>`-45`
+
+El 45 lo puedo dar de baja sin mayores inconvenientes, y la copia del nodo 2 sigue funcionando como elemento separador.
+
+<img src="img/ejercicio15_5.png" width=800>
+
+<br>`-52`
+
+Al eliminar el 52, el nodo 4 entra en underflow, con lo cual:
+* Por politica miro al hermano adyacente derecho
+* El nodo 1 puede redistribuir
+* Queda 66  en nodo 4, y 67 y 70 en nodo 1 (ver si esta ok)
+* La copia del 66 ya no sirve como elemento separador, con lo cual se sube copia del 70
+
+<img src="img/ejercicio15_6.png" width=800>
+
+<br> `+22`
+
+Ingresa sin problemas en el nodo 2
+
+<img src="img/ejercicio15_7.png" width=800>
+
+<br>`+19`
+
+Al ingresar el 19, el nodo 0 entra en overflow.<br>
+Es por ello que el nodo dos se separa, creandose el nodo 5.
+* 15 y 19 quedan en el nodo 0
+* 22 y 23 en el nodo 5
+* Sube una copia del 22 al nodo 2
+
+Ahora el nodo 2 entra en overflow:
+* 22 y 45 se quedan en el nodo 2
+* Se crea el nodo 6 y va el 89
+* Se crea el nodo 7 y va el 67
+
+<img src="img/ejercicio15_8.png" width=800>
+
+<br>`-66`
+
+Al eliminar el 66, el nodo 4 entra en underflow.
+Mas alla de la politica, debo mirar al hermano adyacente izquierdo, quien puede redistribuir sin mayores inconvenientes
+
+<img src="img/ejercicio15_9.png" width=800>
+
+<br>`-22`
+
+Al dar de baja el 22, 2l nodo 5 entra en underflow.
+
+Por politica, debo intentar redistribuir con el nodo derecho, y de no ser posible fusionar. Dado que el nodo 4 no puede redistribuir, debo hacer la fusion, desapareciendo la copia del 22 del nodo 2 que deja de ser necesaria
+
+<img src="img/ejercicio15_10.png" width=800>
+
+<br>`-19`
+
+El 19 puede darse de baja sin problemas del nodo 0
+
+<img src="img/ejercicio15_11.png" width=800>
+
+<br>`-23`
+
+Al dar de baja el 23, el nodo 5 entra en underflow.
+
+Independientemente de la politica, al no tener hermano derecho debo intentar redistribuir o fusionar con el hermano izquierdo.
+Como el nodo 0 no puede ceder elementos, debo fusionar, causando un underflo en el nodo 2.
+
+El nodo 2 intenta redistribuir con el nodo 6, al no poder hacerlo debe fusionar y el arbol baja un nivel.
+
+<img src="img/ejercicio15_12.png" width=800>
+
+<br>`-89`
+
+El 89 se da de baja sin mayores inconvenientes
+
+<img src="img/ejercicio15_13.png" width=800>
