@@ -758,3 +758,43 @@ De esta forma queda el 52 en el nodo 2, el 63 como nuevo padre.
 L8, L2, L4, L0, E0, L7,  E2, E7, E8
 
 <img src="img/ejercicio11_15.png" width=800>
+
+
+
+-----------------------------------------
+14. Dado el siguiente árbol B + de orden 4 y con política de resolución de underflows a
+derecha, realice las siguientes operaciones indicando lecturas y escrituras en el orden
+de ocurrencia. Además, debe describir detalladamente lo que sucede en cada
+operación. +80, -400.
+
+<img src="img/ejercicio14_1.png" width=800>
+
+<br>`+80`
+
+Al agregar el 80, el nodo 0 entra en overflow.
+
+Para solucionarlo, se crea el nodo 5, se separa:
+* el 11 y 50 en nodo 0
+* 77 y 80 en nodo 5
+* Sube la copia del 77 al nodo 4
+
+El nodo 4 entra en overflow (propagacion)
+
+Para solucionarlo:
+* Se crea nodo 6
+* Se separa 80 y 340 en nodo 4
+* 500 en nodo 5
+* Se crea el nodo 7 y sube el 400 como padre.
+
+LE/E = L4, L0, E0, E5, E4, E6, E7
+
+<img src="img/ejercicio14_2.png" width=800>
+
+<br>`-400`
+
+El 400 no existe como elemento real, con lo cual lo que sucede es:
+* Leo nodo 7
+* Leo nodo 4
+* Leo nodo 1
+* Aprovecho el acceso secuencia para ir al nodo 2
+* No encuentro el 400
