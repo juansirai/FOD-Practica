@@ -907,3 +907,143 @@ El nodo 2 intenta redistribuir con el nodo 6, al no poder hacerlo debe fusionar 
 El 89 se da de baja sin mayores inconvenientes
 
 <img src="img/ejercicio15_13.png" width=800>
+
+
+-------------------------------------------------------------
+16. Dada las siguientes operaciones, mostrar la construcción paso a paso de un árbol B+
+de orden 4:
+
++67, +56, +96, +10, +28, +95, +16, +46, +23, +36, +120, +130, +60, +57, -96, -67, -95, -60, -120, -57, -56.
+
+Política de resolución de underflows: derecha o izquierda.
+
+Un arbol de orden 4, puede almacenar como máximo 3 elementos y como mínimo 1.
+
+Los primeros 3 elementos se insertan sin problemas, dando origen al nodo 0.
+
+<img src="img/ejercicio16_1.png" width=800>
+
+<br>`+10`
+
+Al agregar el 10, el nodo 0 entra en overflow, produciendose la separación del mismo y:
+* elementos 10 y 57 quedan en nodo 0
+* 66 y 96 quedan en nodo 1
+* se crea nodo 2 y asciende copia del 66
+
+
+<img src="img/ejercicio16_2.png" width=800>
+
+<br>`+28 +95`
+
+Ambos elementos ingresan sin problemas
+
+<img src="img/ejercicio16_3.png" width=800>
+
+<br>`+16`
+
+Al ingresar el 16, el nodo 0 entra en overflow:
+
+* Se crea el nodo 3, quedando:
+  * 10 y 16 en nodo 0
+  * 28 y 57 en nodo 3
+  * sube copia del 28 al nodo 2
+
+
+<img src="img/ejercicio16_4.png" width=800>
+
+<br>`+46`
+
+Ingresa sin problemas en nodo 3
+
+<img src="img/ejercicio16_5.png" width=800>
+
+<br>`+23`
+
+El 23 ingresa sin problemas en el nodo 0
+
+<br>`+36`
+
+Al ingresar el 36, el nodo 3 entra en overflow:
+* Se crea en nodo 4
+* Se separa 28 y 36 en nodo 3
+* 46 y 57 en nodo 4
+* sube copia del 46 al nodo 2
+
+
+<img src="img/ejercicio16_6.png" width=800>
+
+<br>`+120`
+
+Al ingresar el 120, el nodo 1 entra en overflow:
+* se crea nodo 5
+* 66 y 95 quedan en nodo 1
+* 96 y 120 en nodo 5
+* Sube copia del 96 al nodo 2
+
+Hay propagacion de overflow en nodo 2
+* Se crea nodo 6
+* 28 y 46 quedan en nodo 2
+* 66 sube como clave a un nuevo nodo 7
+* 96 queda en nodo 6.
+
+<img src="img/ejercicio16_7.png" width=800>
+
+<br>`+130 +60`
+
+Los elementos se ingresan sin problemas
+
+Atencion: se corrige retroactivamente los elementos 67 que habian sido cargados mal desde el nodo 0
+
+<img src="img/ejercicio16_8.png" width=800>
+
+<br>`+57`
+
+Al ingresar el 57, el nodo 4 entra en overflow:
+* Se crea nodo 8
+* 46 y 56 permanencen en nodo 4
+* 57 y 60 van al nodo 8
+* Sube copia del 57 al nodo 2
+
+
+<img src="img/ejercicio16_9.png" width=800>
+
+<br>`-96 - 67`
+
+Ambos elementos pueden darse de baja sin generar underflow.
+
+<img src="img/ejercicio16_10.png" width=800>
+
+<br>`-95`
+
+Al dar de baja el 95, el nodo 1 entra en underflow. Por politica, debe intentar redistribuir con nodo 5, el cual puede hacerlo sin mayores inconvenientes.
+
+Sube copia del 130 como elemento separador ya que el 96 no sirve Mas
+
+<img src="img/ejercicio16_11.png" width=800>
+
+<br>`-60 -120`
+
+La baja del 60 puede hacerse sin problemas
+
+Para la baja del 120, el nodo 1 entra en underflow.
+
+Mas alla de la politica, su unico hermano es el nodo 5, con lo cual intenta redistribuir, y como no puede hacerlo debe fusionar.
+
+Al fusionar, el nodo 6 entra en underflow. Como no tiene hermano derecho, debe mirar al nodo 2, con el cual puede redistribuir sin mayores inconvenientes.
+
+<img src="img/ejercicio16_12.png" width=800>
+
+<br>`-57`
+
+La baja del 57 genera underflow en nodo 8.
+Si bien la politica es derecha o izquierda, al no tener adyacente izquierdo debe fusionar con nodo 1.
+
+El nodo 6 entra en underflow, con lo cual debe redistribuir con nodo 2.
+
+<img src="img/ejercicio16_13.png" width=800>
+
+<br>`-56`
+
+La baja del 56 se realiza sin problemas
+
+<img src="img/ejercicio16_14.png" width=800>
